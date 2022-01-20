@@ -1,0 +1,8 @@
+{
+"data": [
+    {"id_voza": "12", "vagoni": "5", "grad": "Nikšić"}, 
+    {"id_voza": "15", "vagoni": "7", "grad": "Sutomore"}, 
+    {"id_voza": "188", "vagoni": "2", "grad": "Beograd"}, 
+    {"id_voza": "144", "vagoni": "10", "grad": "Bijelo Polje "}
+]
+}
