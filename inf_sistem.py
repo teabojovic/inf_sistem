@@ -18,7 +18,7 @@ class Vozovi:
 
         index = info_vozovi.index(self.id_voza)
         self.grad = info_vozovi[index + 1]
-        
+
         if self.grad == "Nikšić":
             print("12:04")
         if self.grad == "Sutomore":
@@ -32,16 +32,10 @@ class Vozovi:
         with open("tehnicki.json",encoding="utf8") as tehnicki_json:
             tehnickii_json=json.load(tehnicki_json)
 
-        vrijeme_tehnicki=[]
-
         for item in tehnickii_json:
             for data_item in item['data']:
-                if data_item["mjesec_tehnickog"] != datetime.now().month:
-                   vrijeme_tehnicki.append(data_item["id_voza"])
-
-        for x in range(len(vrijeme_tehnicki)):
-            print(vrijeme_tehnicki[x])
-        
+                if data_item["id_voza"] == self.id_voza:
+                   return data_item["mjesec_tehnickog"]
 
 class Zaposleni:
     def __init__(self,ime,pozicija,ugovor,mjesec_zaposlenja):
@@ -74,7 +68,4 @@ class Zaposleni:
             self.plata = 700
         if self.pozicija == "Mehaničar":
             self.plata = 480
-
-
-
 
