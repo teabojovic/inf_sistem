@@ -1,18 +1,24 @@
 from datetime import datetime
 import json
+
 class Vozovi:
     def __init__(self,id_voza,vagoni):
         self.id_voza = id_voza
         self.vagoni = vagoni
+
     def vrijeme_dolaska(self):
         with open("vozovi.json",encoding="utf8") as vozovi_json:
             vozovii_json=json.load(vozovi_json)
+
         info_vozovi=[]
+
         for item in vozovii_json:
             for data_item in item['data']:
                 info_vozovi.append(data_item["id_voza"], data_item["grad"])
+
         index = info_vozovi.index(self.id_voza)
         self.grad = info_vozovi[index + 1]
+        
         if self.grad == "Nikšić":
             print("12:04")
         if self.grad == "Sutomore":
@@ -21,6 +27,20 @@ class Vozovi:
            print("18:20")
         if self.grad == "Bijelo Polje":
            print("17:00")
+
+    def tehnicki_pregled(self):
+        with open("tehnicki.json",encoding="utf8") as tehnicki_json:
+            tehnickii_json=json.load(tehnicki_json)
+
+        vrijeme_tehnicki=[]
+
+        for item in tehnickii_json:
+            for data_item in item['data']:
+                if data_item["mjesec_tehnickog"] != datetime.now().month:
+                   vrijeme_tehnicki.append(data_item["id_voza"])
+
+        for x in range(len(vrijeme_tehnicki)):
+            print(vrijeme_tehnicki[x])
         
 
 class Zaposleni:
@@ -29,6 +49,7 @@ class Zaposleni:
         self.pozicija = pozicija
         self.ugovor = ugovor #ugovor(0 za neodredjeno, 1 za odredjeno)
         self.mjesec_zaposlenja = mjesec_zaposlenja
+    
     def set_plata(self):
         if self.pozicija == "Mašinovođa":
             self.plata = 600
@@ -36,14 +57,16 @@ class Zaposleni:
             self.plata = 650
         if self.pozicija == "Mehaničar":
             self.plata = 450
+    
     def produzenje(self):
         if self.ugovor == 0:
-            if self.mjesec_zaposlenja == datetime.now().month: #vraća mjesec na engleskom
+            if self.mjesec_zaposlenja == datetime.now().month:
                 print("Produzi ugovor")
             else:
                 print("Ugovor zaposlenog ističe", self.mjesec_zaposlenja)
         else:
             print("Zaposlen je za stalno")
+    
     def novogodisnji_bonus(self): #plata za decembar
         if self.pozicija == "Mašinovođa":
             self.plata = 630
@@ -51,5 +74,7 @@ class Zaposleni:
             self.plata = 700
         if self.pozicija == "Mehaničar":
             self.plata = 480
+
+
 
 
